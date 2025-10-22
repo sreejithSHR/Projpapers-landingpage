@@ -1,330 +1,909 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
-      rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-      rel="stylesheet" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <title>ProjectPapers.com - Your Research Partner</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap");
 
-    <link rel="stylesheet" href="style.css" />
-    <title>Bus Treval</title>
-  </head>
-  <body>
+        :root {
+            --orange-primary: #FF6B35;
+            --orange-secondary: #FF8C42;
+            --orange-light: #FFB380;
+            --orange-extra-light: #FFF5F0;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --shadow: 0 10px 40px rgba(255, 107, 53, 0.15);
+            --shadow-hover: 0 15px 50px rgba(255, 107, 53, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--orange-primary);
+            transition: width 0.3s;
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, var(--orange-extra-light) 0%, #fff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            min-height: 90vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: var(--white);
+            color: var(--orange-primary);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            background: var(--orange-primary);
+            transform: scale(1.1);
+        }
+
+        .play-btn i {
+            font-size: 1.8rem;
+            color: var(--orange-primary);
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover i {
+            color: var(--white);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            max-width: 500px;
+            width: 100%;
+            filter: drop-shadow(0 20px 40px rgba(255, 107, 53, 0.2));
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 span {
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            transition: height 0.4s;
+            z-index: 0;
+        }
+
+        .feature-card:hover::before {
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--orange-primary);
+        }
+
+        .feature-card > * {
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--orange-extra-light), #FFE5D9);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s;
+        }
+
+        .feature-icon i {
+            font-size: 2.5rem;
+            color: var(--orange-primary);
+            transition: all 0.4s;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: var(--white);
+            transform: scale(1.1);
+        }
+
+        .feature-card:hover .feature-icon i {
+            color: var(--orange-primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            transition: all 0.4s;
+        }
+
+        .feature-card:hover h3 {
+            color: var(--white);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            transition: all 0.4s;
+        }
+
+        .feature-card:hover p {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--orange-extra-light) 0%, #fff 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border: 3px solid var(--white);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--orange-primary);
+        }
+
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-icon i {
+            font-size: 3rem;
+            color: var(--white);
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Stats Banner */
+        .stats {
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item h2 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        /* Domains Section */
+        .domains {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .domain-card {
+            background: var(--orange-extra-light);
+            padding: 2rem;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .domain-card:hover {
+            background: var(--white);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-color: var(--orange-primary);
+        }
+
+        .domain-card i {
+            font-size: 3rem;
+            color: var(--orange-primary);
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .domain-card:hover i {
+            transform: scale(1.2);
+        }
+
+        .domain-card p {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--orange-extra-light) 0%, #fff 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .testimonial-author {
+            color: var(--orange-primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            padding: 4rem 5% 2rem;
+            color: var(--white);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--orange-primary);
+        }
+
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange-primary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--orange-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--orange-secondary);
+            transform: scale(1.1);
+        }
+
+        .social-links i {
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .footer-form input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .footer-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-form button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--orange-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .footer-form button:hover {
+            background: var(--orange-secondary);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .features-grid,
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
     <nav>
-      <div class="nav__header">
-        <div class="nav__logo">
-          <a href="#" class="logo">BusTraveller </a>
-        </div>
-        <div class="nav__menu__btn" id="menu-btn">
-          <i class="ri-menu-line"></i>
-        </div>
-      </div>
-      <ul class="nav__links" id="nav-links">
-        <li><a href="#home">HOME</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#tour">TOUR</a></li>
-        <li><a href="#package">PACKAGE</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-        <li><a href="#">BOOK TRIP</a></li>
-      </ul>
-      <div class="nav__btns">
-        <button class="btn">BOOK TRIP</button>
-      </div>
+        <div class="logo">ProjectPapers.com</div>
+        <ul class="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#services">SERVICES</a></li>
+            <li><a href="#domains">DOMAINS</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+        <button class="cta-btn">GET STARTED</button>
     </nav>
 
-    <header id="home">
-      <div class="header__container">
-        <div class="header__content">
-          <p>BUS YOUR TREVEL JOURNEY</p>
-          <h1>Where Every Bus Ride Feels Magical!</h1>
-          <div class="header__btns">
-            <button class="btn">Book A Trip Now</button>
-            <a href="#">
-              <span><i class="ri-play-circle-fill"></i></span>
-            </a>
-          </div>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="hero-badge">🎓 YOUR TRUSTED RESEARCH PARTNER</span>
+            <h1>Empowering Scholars with <span>Excellence!</span></h1>
+            <p>Transform your academic journey with premium research papers, expert guidance, and comprehensive support tailored to your success.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">Browse Project Papers</button>
+                <div class="play-btn">
+                    <i class="ri-play-fill"></i>
+                </div>
+            </div>
         </div>
-        <div class="header__image">
-          <img src="img/bus.png" alt="header" />
+        <div class="hero-image">
+            <img src="https://cdn-icons-png.flaticon.com/512/3330/3330315.png" alt="research">
         </div>
-      </div>
-    </header>
-
-    <section class="section__container destination__container" id="about">
-      <h2 class="section__header">Popular Destination</h2>
-      <p class="section__description">
-        Discover the Most Loved Destination Around the Globe
-      </p>
-      <div class="destination__grid">
-        <div class="destination__card">
-          <img src="img/card.jpg" alt="destination" />
-          <div class="destination__card__details">
-            <div>
-              <h4>Sacred Calm at Badrinath Temple.</h4>
-              <p>Badrinath, Uttarakhand, India</p>
-            </div>
-            <div class="destination__ratings">
-              <span><i class="ri-star-fill"></i></span>
-              4.7
-            </div>
-          </div>
-        </div>
-        <div class="destination__card">
-          <img src="img/card2.jpg" alt="destination" />
-          <div class="destination__card__details">
-            <div>
-              <h4>Divine Majesty at Jagannath Temple.</h4>
-              <p>Puri, Odisha, India</p>
-            </div>
-            <div class="destination__ratings">
-              <span><i class="ri-star-fill"></i></span>
-              4.8
-            </div>
-          </div>
-        </div>
-        <div class="destination__card">
-          <img src="img/card3.webp" alt="destination" />
-          <div class="destination__card__details">
-            <div>
-              <h4>Spiritual Serenity at Neem Karoli Temple.</h4>
-              <p>Dehradun, India</p>
-            </div>
-            <div class="destination__ratings">
-              <span><i class="ri-star-fill"></i></span>
-              4.5
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section class="section__container journey__container" id="tour">
-      <h2 class="section__header">Bus Travel, the Easy Way!</h2>
-      <p class="section__description">
-        Effortless planning for Your Next Adventure
-      </p>
-      <div class="journey__grid">
-        <div class="journey__card">
-          <div class="journey__card__bg">
-            <span><i class="ri-bookmark-3-line"></i></span>
-            <h4>Seamless Booking Process</h4>
-          </div>
-          <div class="journey__card__content">
-            <span><i class="ri-bookmark-3-line"></i></span>
-            <h4>Seat Booking, one Click Away</h4>
-            <p>
-              From booking tickets to tracking your bus in real-time, everything
-              is just a click away. No more long queues or last-minute confusion
-              — plan, book, and board with complete ease. Your journey,
-              simplified.
-            </p>
-          </div>
+    <section class="features" id="about">
+        <div class="section-header">
+            <h2>Why Choose <span>ProjectPapers.com</span></h2>
+            <p>Your Gateway to Research Excellence and Academic Success</p>
         </div>
-
-        <div class="journey__card">
-          <div class="journey__card__bg">
-            <span><i class="ri-landscape-fill"></i></span>
-            <h4>Tailored Itineraries</h4>
-          </div>
-          <div class="journey__card__content">
-            <span><i class="ri-landscape-fill"></i></span>
-            <h4>Customized Plans Just for You</h4>
-            <p>
-              Everyone travels differently — that’s why we create plans just for
-              you. From preferred timings to budget-friendly options and seat
-              choices, enjoy a trip designed around your lifestyle.
-            </p>
-          </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="ri-shield-check-line"></i>
+                </div>
+                <h3>100% Original Content</h3>
+                <p>Every paper is written from scratch by experienced academic writers and thoroughly checked using advanced plagiarism detection tools to ensure complete originality.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="ri-user-star-line"></i>
+                </div>
+                <h3>Expert Domain Authors</h3>
+                <p>Our team consists of PhD-qualified researchers and subject matter experts with extensive experience in their respective fields, ensuring top-quality academic work.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="ri-time-line"></i>
+                </div>
+                <h3>Instant Access Available</h3>
+                <p>Get instant access to ready-made papers right after purchase. No waiting periods – download your research materials immediately and start working on your project.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="ri-pencil-ruler-2-line"></i>
+                </div>
+                <h3>Full Customization</h3>
+                <p>We customize every paper to match your specific research topic, objectives, and university guidelines. Your requirements are our priority.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="ri-lock-line"></i>
+                </div>
+                <h3>Confidential Service</h3>
+                <p>Your privacy is paramount. All transactions and communications are completely confidential with secure payment processing and data protection.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="ri-price-tag-3-line"></i>
+                </div>
+                <h3>Affordable Pricing</h3>
+                <p>Quality research support doesn't have to break the bank. We offer competitive, transparent pricing with no hidden fees or unexpected charges.</p>
+            </div>
         </div>
-
-        <div class="journey__card">
-          <div class="journey__card__bg">
-            <span><i class="ri-map-2-line"></i></span>
-            <h4>Expert Local Insights</h4>
-          </div>
-          <div class="journey__card__content">
-            <span><i class="ri-map-2-line"></i></span>
-            <h4>Insider Tips and Recommendations</h4>
-            <p>
-              From the best boarding points to local travel hacks, our insights
-              are powered by real people who know the roads. It’s local
-              knowledge, delivered straight to your screen.
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section class="section__container showcase__container" id="package">
-      <div class="showcase__image">
-        <img src="img/showcase.webp" alt="showcase" />
-      </div>
-      <div class="showcase__content">
-        <h4>Ignite Your Wanderlust with Every Bus Ride</h4>
-        <p>
-          Traveling by bus offers comfort and stunning views on your way to
-          amazing destinations. With spacious seats and air conditioning, you
-          can relax and enjoy the ride, whether you're heading to a vibrant city
-          or a peaceful getaway. It’s the perfect way to travel affordably and
-          conveniently while experiencing the beauty of the journey.
-        </p>
-        <p>
-          Explore the World by Bus with Ease Hop on a bus and experience the joy
-          of travel at your own pace. From comfortable seating to scenic routes,
-          our buses offer the perfect way to explore cities, nature, and
-          everything in between. Whether it's a quick trip or a long adventure,
-          sit back, relax, and enjoy the ride.
-        </p>
-        <div class="showcase__btn">
-          <button class="btn">
-            BOOK A Bus Now
-            <span><i class="ri-arrow-right-line"></i></span>
-          </button>
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>Our Comprehensive <span>Services</span></h2>
+            <p>Complete Research Support for Every Academic Need</p>
         </div>
-      </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="ri-file-text-line"></i>
+                </div>
+                <h3>Ready-Made Project Papers</h3>
+                <p>Instant access to well-researched, field-tested project papers for reference or academic use across multiple disciplines and research areas.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="ri-graduation-cap-line"></i>
+                </div>
+                <h3>Customized Dissertations</h3>
+                <p>Personalized dissertation support from PhD-qualified experts, tailored to your research topic and institution's specific requirements.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="ri-book-open-line"></i>
+                </div>
+                <h3>Chapter-Wise Writing</h3>
+                <p>Assistance in structuring and refining each chapter from literature review to data analysis with complete academic rigor.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="ri-lightbulb-line"></i>
+                </div>
+                <h3>Research Proposal Development</h3>
+                <p>Develop strong research proposals with clear objectives, methodology, and scope that meet high academic standards.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="ri-bar-chart-box-line"></i>
+                </div>
+                <h3>Data Analysis Support</h3>
+                <p>Statistical support and guidance to ensure your research findings are accurate, valid, and properly interpreted with clarity.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="ri-discuss-line"></i>
+                </div>
+                <h3>Expert Consultation</h3>
+                <p>One-on-one guidance from field specialists to enhance your research skills and academic writing confidence throughout your journey.</p>
+            </div>
+        </div>
     </section>
 
-    <section class="section__container banner__container">
-      <div class="banner__card">
-        <h4>10+</h4>
-        <p>Years Experience</p>
-      </div>
-      <div class="banner__card">
-        <h4>12k</h4>
-        <p>Happy Clients</p>
-      </div>
-      <div class="banner__card">
-        <h4>4.8</h4>
-        <p>Overrall Ratings</p>
-      </div>
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h2>100%</h2>
+                <p>Plagiarism Free</p>
+            </div>
+            <div class="stat-item">
+                <h2>5000+</h2>
+                <p>Happy Researchers</p>
+            </div>
+            <div class="stat-item">
+                <h2>24/7</h2>
+                <p>Expert Support</p>
+            </div>
+        </div>
     </section>
 
-    <section class="section__container discover__container">
-      <h2 class="section__header">
-        Discover Peace, Culture, and Devotion with Our Temple Bus Travels
-      </h2>
-      <p class="section__description">
-        Witness Stunning Landscapes from the Comfort of Your Bus Seat"
-      </p>
-      <div class="discover__grid">
-        <div class="discover__card">
-          <span><i class="ri-camera-lens-line"></i></span>
-          <h4>Your Road, Your Story</h4>
-          <p>
-            Experience the freedom of travel with our comfortable and reliable
-            bus trips. Enjoy stunning views along the way while relaxing in
-            spacious seats. Whether it's a short trip or a long journey, our
-            buses ensure a smooth and enjoyable ride.
-          </p>
+    <section class="domains" id="domains">
+        <div class="section-header">
+            <h2>Research <span>Domains</span> We Cover</h2>
+            <p>Expertise Across Multiple Academic Disciplines</p>
         </div>
-        <div class="discover__card">
-          <span><i class="ri-ship-line"></i></span>
-          <h4>Coastal Wonders</h4>
-          <p>
-            Embark on a journey through the mesmerizing coastal wonders. Enjoy
-            the serene beauty of pristine beaches, stunning cliffs, and
-            breathtaking ocean views, all from the comfort of our bus. Let the
-            coastal breeze guide you to unforgettable destinations.
-          </p>
+        <div class="domains-grid">
+            <div class="domain-card">
+                <i class="ri-computer-line"></i>
+                <p>Computer Science & IT</p>
+            </div>
+            <div class="domain-card">
+                <i class="ri-cpu-line"></i>
+                <p>Electronics & Communication</p>
+            </div>
+            <div class="domain-card">
+                <i class="ri-briefcase-line"></i>
+                <p>Management & Commerce</p>
+            </div>
+            <div class="domain-card">
+                <i class="ri-tools-line"></i>
+                <p>Engineering & Technology</p>
+            </div>
+            <div class="domain-card">
+                <i class="ri-book-2-line"></i>
+                <p>Education & Psychology</p>
+            </div>
+            <div class="domain-card">
+                <i class="ri-microscope-line"></i>
+                <p>Life Sciences & Biotech</p>
+            </div>
+            <div class="domain-card">
+                <i class="ri-quill-pen-line"></i>
+                <p>Literature & Linguistics</p>
+            </div>
+            <div class="domain-card">
+                <i class="ri-team-line"></i>
+                <p>Social Sciences & Humanities</p>
+            </div>
         </div>
-        <div class="discover__card">
-          <span><i class="ri-landscape-line"></i></span>
-          <h4>Historic Landmarks</h4>
-          <p>
-            Explore the charm of historic landmarks on our specially curated bus
-            tours. Our comfortable buses will take you through iconic sites,
-            offering insights into their fascinating stories. Sit back, relax,
-            and immerse yourself in the rich history that each destination
-            holds.
-          </p>
+    </section>
+
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>What Our <span>Customers</span> Say</h2>
+            <p>Real Success Stories from Satisfied Researchers</p>
         </div>
-      </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p>"ProjectPapers.com made my PhD dissertation so much easier. The paper quality was top-notch and plagiarism-free. Highly recommend their services!"</p>
+                <div class="testimonial-author">— Dr. Meena, Research Scholar</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"I got my management project paper within two days. Very professional and affordable service! The team was incredibly responsive and helpful."</p>
+                <div class="testimonial-author">— Suresh Kumar, MBA Student</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"Their customized project writing service was a lifesaver for my MPhil. Great quality and professionalism throughout the entire process."</p>
+                <div class="testimonial-author">— Priya Nair, MPhil Candidate</div>
+            </div>
+        </div>
     </section>
 
     <footer id="contact">
-      <div class="section__container footer__container">
-        <div class="footer__col">
-          <div class="footer__logo">
-            <a href="#" class="logo">BusTraveller</a>
-          </div>
-          <p>
-            Explore the world with ease and excitement through our all-in-one
-            bus travel platform. Your journey begins here — where smooth
-            planning meets unforgettable road experiences.
-          </p>
-          <ul class="footer__socials">
-            <li>
-              <a href="#!"><i class="ri-facebook-fill"></i></a>
-            </li>
-            <li>
-              <a href="#!"><i class="ri-instagram-line"></i></a>
-            </li>
-            <li>
-              <a href="#!"><i class="ri-youtube-line"></i></a>
-            </li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <h4>Quick Links</h4>
-          <ul class="footer__links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Bus</a></li>
-            <li><a href="#">Hotels</a></li>
-            <li><a href="#">Cruise</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <h4>Contact Us</h4>
-          <ul class="footer__links">
-            <li>
-              <a href="#">
-                <span><i class="ri-phone-fill"></i></span>+91 12345 67890
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span><i class="ri-record-mail-line"></i></span>
-                info@BusTraveller
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span><i class="ri-map-pin-2-fill"></i></span> Agra, India
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <h4>Subscribe</h4>
-          <form action="#!">
-            <input type="text" placeholder="Enter your email" />
-            <button class="btn">Subscribe</button>
-          </form>
-        </div>
-      </div>
-      <div class="footer__bar">
-        Copyright © 2025 Code Prashtt. All rights reserved.
-        <p>
-          Distributed by
-          <a
-            class="text-white"
-            href="https://www.themewagon.com"
-            target="_blank"
-            >ThemeWagon</a
-          >
-        </p>
-      </div>
-    </footer>
-
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  </body>
-</html>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>ProjectPapers.com</h3>
+                <p>Empowering scholars with ready-made an
