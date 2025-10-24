@@ -7,20 +7,22 @@
     <meta name="keywords" content="research papers, project papers, academic writing, dissertation, thesis, research support, plagiarism-free, custom research, data analysis, literature review">
     <meta name="author" content="ProjectPapers.com">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
-    <title>ProjectPapers.com - Your Research Partner | Academic Writing Services</title>
+    <title>ProjectPapers - Your Research Partner | Academic Writing Services</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap");
 
         :root {
-            --orange-primary: #FF6B35;
-            --orange-secondary: #FF8C42;
-            --orange-light: #FFB380;
-            --orange-extra-light: #FFF5F0;
+            --orange-primary: rgba(255, 107, 53, 0.85);
+            --orange-secondary: rgba(255, 140, 66, 0.85);
+            --orange-light: rgba(255, 179, 128, 0.7);
+            --orange-extra-light: rgba(255, 245, 240, 0.5);
+            --yellow-accent: rgba(255, 214, 102, 0.8);
+            --yellow-light: rgba(255, 243, 205, 0.6);
             --white: #ffffff;
             --text-dark: #1a1a1a;
             --text-light: #666666;
-            --shadow: 0 10px 40px rgba(255, 107, 53, 0.15);
-            --shadow-hover: 0 15px 50px rgba(255, 107, 53, 0.25);
+            --shadow: 0 10px 40px rgba(255, 107, 53, 0.12);
+            --shadow-hover: 0 15px 50px rgba(255, 107, 53, 0.2);
         }
 
         * {
@@ -40,23 +42,32 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
             padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
             z-index: 1000;
             transition: all 0.3s;
         }
 
-        .logo {
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .menu-btn {
+            display: none;
             font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text-dark);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
         }
 
         .nav-links {
@@ -81,7 +92,7 @@
             left: 0;
             width: 0;
             height: 3px;
-            background: var(--orange-primary);
+            background: linear-gradient(90deg, var(--orange-primary), var(--yellow-accent));
             transition: width 0.3s;
             border-radius: 10px;
         }
@@ -92,36 +103,74 @@
 
         .cta-btn {
             padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary), var(--yellow-accent));
             color: var(--white);
             border: none;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-btn:hover::before {
+            left: 100%;
         }
 
         .cta-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.35);
         }
 
         /* Hero Section */
         .hero {
             margin-top: 80px;
             padding: 6rem 5% 4rem;
-            background: linear-gradient(135deg, var(--orange-extra-light) 0%, #fff 100%);
+            background: linear-gradient(135deg, var(--yellow-light) 0%, var(--orange-extra-light) 50%, #fff 100%);
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 4rem;
             min-height: 90vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--yellow-accent), transparent);
+            top: -250px;
+            right: -250px;
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
         }
 
         .hero-content {
             flex: 1;
             animation: slideInLeft 0.8s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-badge {
@@ -133,7 +182,13 @@
             font-weight: 600;
             font-size: 0.85rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.15);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .hero h1 {
@@ -145,7 +200,7 @@
         }
 
         .hero h1 span {
-            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary), var(--yellow-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -166,7 +221,7 @@
 
         .btn-primary {
             padding: 1.2rem 2.5rem;
-            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary), var(--yellow-accent));
             color: var(--white);
             border: none;
             border-radius: 50px;
@@ -174,12 +229,29 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.35);
         }
 
         .play-btn {
@@ -196,7 +268,7 @@
         }
 
         .play-btn:hover {
-            background: var(--orange-primary);
+            background: linear-gradient(135deg, var(--orange-primary), var(--yellow-accent));
             transform: scale(1.1);
         }
 
@@ -215,23 +287,38 @@
             display: flex;
             justify-content: center;
             animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-image img {
             max-width: 500px;
             width: 100%;
-            filter: drop-shadow(0 20px 40px rgba(255, 107, 53, 0.2));
+            filter: drop-shadow(0 20px 40px rgba(255, 107, 53, 0.15));
         }
 
         /* Features Section */
         .features {
             padding: 6rem 5%;
             background: var(--white);
+            position: relative;
         }
 
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section-header h2 {
@@ -242,7 +329,7 @@
         }
 
         .section-header h2 span {
-            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary), var(--yellow-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -270,7 +357,26 @@
             position: relative;
             overflow: hidden;
             border: 3px solid transparent;
+            animation: fadeIn 0.6s ease-out backwards;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
 
         .feature-card::before {
             content: '';
@@ -279,7 +385,7 @@
             left: 0;
             width: 100%;
             height: 0;
-            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary), var(--yellow-accent));
             transition: height 0.4s;
             z-index: 0;
         }
@@ -303,7 +409,7 @@
         .feature-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--orange-extra-light), #FFE5D9);
+            background: linear-gradient(135deg, var(--orange-extra-light), var(--yellow-light));
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -314,17 +420,20 @@
 
         .feature-icon i {
             font-size: 2.5rem;
-            color: var(--orange-primary);
+            background: linear-gradient(135deg, var(--orange-primary), var(--yellow-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             transition: all 0.4s;
         }
 
         .feature-card:hover .feature-icon {
             background: var(--white);
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
 
         .feature-card:hover .feature-icon i {
-            color: var(--orange-primary);
+            -webkit-text-fill-color: var(--orange-primary);
         }
 
         .feature-card h3 {
@@ -349,13 +458,13 @@
             color: rgba(255, 255, 255, 0.95);
         }
 
-        /* Services Section */
-        .services {
+        /* Solutions Section */
+        .solutions {
             padding: 6rem 5%;
-            background: linear-gradient(135deg, var(--orange-extra-light) 0%, #fff 100%);
+            background: linear-gradient(135deg, var(--yellow-light) 0%, var(--orange-extra-light) 50%, #fff 100%);
         }
 
-        .services-grid {
+        .solutions-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2.5rem;
@@ -363,7 +472,7 @@
             margin: 0 auto;
         }
 
-        .service-card {
+        .solution-card {
             background: var(--white);
             padding: 2.5rem;
             border-radius: 30px;
@@ -371,18 +480,36 @@
             box-shadow: var(--shadow);
             transition: all 0.3s;
             border: 3px solid var(--white);
+            position: relative;
+            overflow: hidden;
         }
 
-        .service-card:hover {
+        .solution-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--orange-primary), var(--yellow-accent));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .solution-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .solution-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-hover);
-            border-color: var(--orange-primary);
+            border-color: var(--yellow-accent);
         }
 
-        .service-icon {
+        .solution-icon {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary), var(--yellow-accent));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -391,23 +518,23 @@
             transition: all 0.3s;
         }
 
-        .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(5deg);
+        .solution-card:hover .solution-icon {
+            transform: scale(1.1) rotate(10deg);
         }
 
-        .service-icon i {
+        .solution-icon i {
             font-size: 3rem;
             color: var(--white);
         }
 
-        .service-card h3 {
+        .solution-card h3 {
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 1rem;
         }
 
-        .service-card p {
+        .solution-card p {
             color: var(--text-light);
             line-height: 1.8;
         }
@@ -415,7 +542,31 @@
         /* Stats Banner */
         .stats {
             padding: 4rem 5%;
-            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary), var(--yellow-accent));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -150px;
+            left: -150px;
+        }
+
+        .stats::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -200px;
+            right: -200px;
         }
 
         .stats-grid {
@@ -425,6 +576,8 @@
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .stat-item h2 {
@@ -432,11 +585,17 @@
             font-weight: 800;
             color: var(--white);
             margin-bottom: 0.5rem;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .stat-item p {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             font-weight: 600;
         }
 
@@ -448,37 +607,50 @@
 
         .domains-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 2rem;
             max-width: 1400px;
             margin: 0 auto;
+            justify-items: center;
+        }
+
+        /* Center last row items */
+        .domains-grid::after {
+            content: '';
+            flex: auto;
         }
 
         .domain-card {
-            background: var(--orange-extra-light);
-            padding: 2rem;
+            background: linear-gradient(135deg, var(--orange-extra-light), var(--yellow-light));
+            padding: 2.5rem 2rem;
             border-radius: 25px;
             text-align: center;
             transition: all 0.3s;
             border: 3px solid transparent;
+            cursor: pointer;
+            width: 100%;
+            max-width: 280px;
         }
 
         .domain-card:hover {
             background: var(--white);
-            transform: translateY(-8px);
+            transform: translateY(-8px) scale(1.05);
             box-shadow: var(--shadow);
-            border-color: var(--orange-primary);
+            border-color: var(--yellow-accent);
         }
 
         .domain-card i {
             font-size: 3rem;
-            color: var(--orange-primary);
+            background: linear-gradient(135deg, var(--orange-primary), var(--yellow-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1rem;
             transition: all 0.3s;
         }
 
         .domain-card:hover i {
-            transform: scale(1.2);
+            transform: scale(1.2) rotateY(360deg);
         }
 
         .domain-card p {
@@ -490,7 +662,7 @@
         /* Testimonials */
         .testimonials {
             padding: 6rem 5%;
-            background: linear-gradient(135deg, var(--orange-extra-light) 0%, #fff 100%);
+            background: linear-gradient(135deg, var(--yellow-light) 0%, var(--orange-extra-light) 50%, #fff 100%);
         }
 
         .testimonials-grid {
@@ -507,11 +679,13 @@
             border-radius: 30px;
             box-shadow: var(--shadow);
             transition: all 0.3s;
+            border-left: 5px solid transparent;
         }
 
         .testimonial-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
+            border-left-color: var(--yellow-accent);
         }
 
         .testimonial-card p {
@@ -523,7 +697,10 @@
         }
 
         .testimonial-author {
-            color: var(--orange-primary);
+            background: linear-gradient(135deg, var(--orange-primary), var(--yellow-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 700;
             font-size: 1.1rem;
         }
@@ -537,64 +714,48 @@
         .contact-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
+            gap: 3rem;
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
         }
 
         .contact-item {
             display: flex;
             align-items: flex-start;
             gap: 1.5rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--orange-extra-light), var(--yellow-light));
+            border-radius: 25px;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--yellow-accent);
+            background: var(--white);
         }
 
         .contact-item i {
-            font-size: 2rem;
-            color: var(--orange-primary);
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--orange-primary), var(--yellow-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-top: 0.5rem;
         }
 
-        .contact-item h4 {
+        .contact-item-content h4 {
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
 
-        .contact-item p {
+        .contact-item-content p {
             color: var(--text-light);
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            padding: 1rem;
-            border: 2px solid var(--orange-extra-light);
-            border-radius: 15px;
-            font-family: "Poppins", sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: var(--orange-primary);
-            outline: none;
-        }
-
-        .contact-form button {
-            align-self: flex-start;
+            line-height: 1.6;
         }
 
         /* Footer */
@@ -616,7 +777,10 @@
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
-            color: var(--orange-primary);
+            background: linear-gradient(135deg, var(--orange-primary), var(--yellow-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .footer-col p {
@@ -643,7 +807,7 @@
         }
 
         .footer-links a:hover {
-            color: var(--orange-primary);
+            color: var(--yellow-accent);
             padding-left: 5px;
         }
 
@@ -656,7 +820,7 @@
         .social-links a {
             width: 45px;
             height: 45px;
-            background: var(--orange-primary);
+            background: linear-gradient(135deg, var(--orange-primary), var(--yellow-accent));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -665,8 +829,8 @@
         }
 
         .social-links a:hover {
-            background: var(--orange-secondary);
-            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--yellow-accent), var(--orange-secondary));
+            transform: scale(1.1) rotate(10deg);
         }
 
         .social-links i {
@@ -691,7 +855,7 @@
         .footer-form button {
             width: 100%;
             padding: 1rem;
-            background: var(--orange-primary);
+            background: linear-gradient(135deg, var(--orange-primary), var(--yellow-accent));
             color: var(--white);
             border: none;
             border-radius: 50px;
@@ -701,8 +865,8 @@
         }
 
         .footer-form button:hover {
-            background: var(--orange-secondary);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
         .footer-bottom {
@@ -732,52 +896,244 @@
             }
         }
 
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B35, #FF8C42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 1001;
+            position: relative;
+        }
+
         @media (max-width: 768px) {
+            .logo {
+                font-size: 1.2rem;
+                white-space: nowrap;
+            }
+
+            .menu-btn {
+                display: block;
+                flex-shrink: 0;
+            }
+
+            nav {
+                padding: 1rem 3%;
+            }
+
+            .nav-content {
+                max-width: 100%;
+            }
+
             .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 75%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                padding: 2rem;
+                box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+                transition: left 0.3s ease-in-out;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .cta-btn {
                 display: none;
+            }
+
+            .nav-links .mobile-cta {
+                display: block !important;
+                width: 100%;
+                padding: 1rem 2rem;
+                text-align: center;
+                background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary), var(--yellow-accent));
+                color: var(--white);
+                border: none;
+                border-radius: 50px;
+                font-weight: 600;
+                cursor: pointer;
+                margin-top: 1rem;
             }
 
             .hero {
                 flex-direction: column;
                 text-align: center;
                 padding-top: 4rem;
+                padding-left: 3%;
+                padding-right: 3%;
             }
 
             .hero h1 {
                 font-size: 2.5rem;
             }
 
+            .hero p {
+                font-size: 1rem;
+            }
+
             .hero-buttons {
                 justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .btn-primary {
+                font-size: 0.9rem;
+                padding: 1rem 1.5rem;
             }
 
             .features-grid,
-            .services-grid,
+            .solutions-grid,
             .testimonials-grid {
                 grid-template-columns: 1fr;
+                padding: 0 1rem;
             }
 
             .section-header h2 {
                 font-size: 2rem;
+                line-height: 1.3;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            .feature-card,
+            .solution-card,
+            .testimonial-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .domains-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .domain-card {
+                max-width: 100%;
             }
 
             .contact-container {
                 grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .contact-item {
+                padding: 1.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stat-item h2 {
+                font-size: 3rem;
+            }
+
+            .stat-item p {
+                font-size: 1rem;
+            }
+
+            .stats {
+                padding: 3rem 4%;
+            }
+
+            .features,
+            .solutions,
+            .domains,
+            .testimonials,
+            .contact {
+                padding: 4rem 4%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1rem;
+                max-width: 70%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .menu-btn {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                padding: 0.8rem 3%;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.7rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-primary {
+                width: 100%;
+            }
+
+            .play-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .play-btn i {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="logo">ProjectPapers.com</div>
-        <ul class="nav-links">
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#services">SERVICES</a></li>
-            <li><a href="#domains">DOMAINS</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-        </ul>
-        <button class="cta-btn">GET STARTED</button>
+        <div class="nav-content">
+            <div class="logo">ProjectPapers</div>
+            <button class="menu-btn" id="menuBtn">
+                <i class="ri-menu-3-line" id="menuIcon"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link">HOME</a></li>
+                <li><a href="#about" class="nav-link">ABOUT</a></li>
+                <li><a href="#solutions" class="nav-link">SOLUTIONS</a></li>
+                <li><a href="#domains" class="nav-link">DOMAINS</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+                <li style="display: none;"><button class="mobile-cta">GET STARTED</button></li>
+            </ul>
+            <button class="cta-btn">GET STARTED</button>
+        </div>
     </nav>
 
     <section class="hero" id="home">
@@ -787,9 +1143,7 @@
             <p>Transform your academic journey with premium research papers, expert guidance, and comprehensive support tailored to your success.</p>
             <div class="hero-buttons">
                 <button class="btn-primary">Browse Project Papers</button>
-                <div class="play-btn">
-                    <i class="ri-play-fill"></i>
-                </div>
+                
             </div>
         </div>
         <div class="hero-image">
@@ -799,7 +1153,7 @@
 
     <section class="features" id="about">
         <div class="section-header">
-            <h2>Why Choose <span>ProjectPapers.com</span></h2>
+            <h2>Why Choose <span>ProjectPapers</span></h2>
             <p>Your Gateway to Research Excellence and Academic Success</p>
         </div>
         <div class="features-grid">
@@ -848,49 +1202,49 @@
         </div>
     </section>
 
-    <section class="services" id="services">
+    <section class="solutions" id="solutions">
         <div class="section-header">
-            <h2>Our Comprehensive <span>Services</span></h2>
+            <h2>Our Research <span>Solutions</span></h2>
             <p>Complete Research Support for Every Academic Need</p>
         </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">
+        <div class="solutions-grid">
+            <div class="solution-card">
+                <div class="solution-icon">
                     <i class="ri-file-text-line"></i>
                 </div>
                 <h3>Ready-Made Project Papers</h3>
                 <p>Instant access to well-researched, field-tested project papers for reference or academic use across multiple disciplines and research areas.</p>
             </div>
-            <div class="service-card">
-                <div class="service-icon">
+            <div class="solution-card">
+                <div class="solution-icon">
                     <i class="ri-graduation-cap-line"></i>
                 </div>
                 <h3>Customized Dissertations</h3>
                 <p>Personalized dissertation support from PhD-qualified experts, tailored to your research topic and institution's specific requirements.</p>
             </div>
-            <div class="service-card">
-                <div class="service-icon">
+            <div class="solution-card">
+                <div class="solution-icon">
                     <i class="ri-book-open-line"></i>
                 </div>
                 <h3>Chapter-Wise Writing</h3>
                 <p>Assistance in structuring and refining each chapter from literature review to data analysis with complete academic rigor.</p>
             </div>
-            <div class="service-card">
-                <div class="service-icon">
+            <div class="solution-card">
+                <div class="solution-icon">
                     <i class="ri-lightbulb-line"></i>
                 </div>
                 <h3>Research Proposal Development</h3>
                 <p>Develop strong research proposals with clear objectives, methodology, and scope that meet high academic standards.</p>
             </div>
-            <div class="service-card">
-                <div class="service-icon">
+            <div class="solution-card">
+                <div class="solution-icon">
                     <i class="ri-bar-chart-box-line"></i>
                 </div>
                 <h3>Data Analysis Support</h3>
                 <p>Statistical support and guidance to ensure your research findings are accurate, valid, and properly interpreted with clarity.</p>
             </div>
-            <div class="service-card">
-                <div class="service-icon">
+            <div class="solution-card">
+                <div class="solution-icon">
                     <i class="ri-discuss-line"></i>
                 </div>
                 <h3>Expert Consultation</h3>
@@ -918,41 +1272,41 @@
 
     <section class="domains" id="domains">
         <div class="section-header">
-            <h2>Research <span>Domains</span> We Cover</h2>
-            <p>Expertise Across Multiple Academic Disciplines</p>
+            <h2>Our <span>Specialized</span> Research Domains</h2>
+            <p>Expert Research Papers & Analysis Across Key Business & Industry Sectors</p>
         </div>
         <div class="domains-grid">
             <div class="domain-card">
-                <i class="ri-computer-line"></i>
-                <p>Computer Science & IT</p>
+                <i class="ri-file-chart-line"></i>
+                <p>Accounting & Finance</p>
             </div>
             <div class="domain-card">
-                <i class="ri-cpu-line"></i>
-                <p>Electronics & Communication</p>
+                <i class="ri-bank-line"></i>
+                <p>Banking & Financial Institutions</p>
             </div>
             <div class="domain-card">
-                <i class="ri-briefcase-line"></i>
-                <p>Management & Commerce</p>
+                <i class="ri-megaphone-line"></i>
+                <p>Marketing & Consumer Research</p>
             </div>
             <div class="domain-card">
-                <i class="ri-tools-line"></i>
-                <p>Engineering & Technology</p>
+                <i class="ri-global-line"></i>
+                <p>Global Industry Analysis</p>
             </div>
             <div class="domain-card">
-                <i class="ri-book-2-line"></i>
-                <p>Education & Psychology</p>
+                <i class="ri-bar-chart-box-line"></i>
+                <p>Market Intelligence Reports</p>
             </div>
             <div class="domain-card">
-                <i class="ri-microscope-line"></i>
-                <p>Life Sciences & Biotech</p>
+                <i class="ri-restaurant-line"></i>
+                <p>Food & Beverage Industry</p>
             </div>
             <div class="domain-card">
-                <i class="ri-quill-pen-line"></i>
-                <p>Literature & Linguistics</p>
+                <i class="ri-health-book-line"></i>
+                <p>Healthcare & Medical Research</p>
             </div>
             <div class="domain-card">
-                <i class="ri-team-line"></i>
-                <p>Social Sciences & Humanities</p>
+                <i class="ri-service-line"></i>
+                <p>Service Industry Analysis</p>
             </div>
         </div>
     </section>
@@ -964,7 +1318,7 @@
         </div>
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <p>"ProjectPapers.com made my PhD dissertation so much easier. The paper quality was top-notch and plagiarism-free. Highly recommend their services!"</p>
+                <p>"ProjectPapers made my PhD dissertation so much easier. The paper quality was top-notch and plagiarism-free. Highly recommend their services!"</p>
                 <div class="testimonial-author">— Dr. Meena, Research Scholar</div>
             </div>
             <div class="testimonial-card">
@@ -984,51 +1338,34 @@
             <p>Have questions about our research papers or academic writing services? We're here to help!</p>
         </div>
         <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="ri-map-pin-line"></i>
-                    <div>
-                        <h4>Our Location</h4>
-                        <p>123 Research Avenue, Academic City, RC 56789</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <i class="ri-phone-line"></i>
-                    <div>
-                        <h4>Call Us</h4>
-                        <p>+1 234 567 8900</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <i class="ri-mail-line"></i>
-                    <div>
-                        <h4>Email Us</h4>
-                        <p>support@projectpapers.com</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <i class="ri-time-line"></i>
-                    <div>
-                        <h4>Working Hours</h4>
-                        <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                        <p>Saturday: 10:00 AM - 4:00 PM</p>
-                    </div>
+            <div class="contact-item">
+                <i class="ri-map-pin-line"></i>
+                <div class="contact-item-content">
+                    <h4>Our Location</h4>
+                    <p>40/1, Dr. Thomas Road,<br>T. Nagar, Chennai - 600017</p>
                 </div>
             </div>
-            <form class="contact-form">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <input type="text" placeholder="Subject" required>
-                <textarea rows="5" placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn-primary">Send Message</button>
-            </form>
+            <div class="contact-item">
+                <i class="ri-phone-line"></i>
+                <div class="contact-item-content">
+                    <h4>Call Us</h4>
+                    <p>+91 981 96 50213</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="ri-mail-line"></i>
+                <div class="contact-item-content">
+                    <h4>Email Us</h4>
+                    <p>info@projectspapers.com</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <h3>ProjectPapers.com</h3>
+                <h3>ProjectPapers</h3>
                 <p>Your trusted partner for premium research papers and academic writing services. We empower scholars with excellence through expert guidance and comprehensive research support.</p>
                 <div class="social-links">
                     <a href="#"><i class="ri-facebook-fill"></i></a>
@@ -1042,13 +1379,13 @@
                 <ul class="footer-links">
                     <li><a href="#home"><i class="ri-arrow-right-s-line"></i> Home</a></li>
                     <li><a href="#about"><i class="ri-arrow-right-s-line"></i> About Us</a></li>
-                    <li><a href="#services"><i class="ri-arrow-right-s-line"></i> Services</a></li>
+                    <li><a href="#solutions"><i class="ri-arrow-right-s-line"></i> Solutions</a></li>
                     <li><a href="#domains"><i class="ri-arrow-right-s-line"></i> Research Domains</a></li>
                     <li><a href="#contact"><i class="ri-arrow-right-s-line"></i> Contact</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>Our Services</h3>
+                <h3>Our Solutions</h3>
                 <ul class="footer-links">
                     <li><a href="#"><i class="ri-arrow-right-s-line"></i> Ready-Made Papers</a></li>
                     <li><a href="#"><i class="ri-arrow-right-s-line"></i> Custom Dissertations</a></li>
@@ -1067,18 +1404,49 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 ProjectPapers.com. All rights reserved. | Your Trusted Research Partner for Academic Success</p>
+            <p>&copy; 2025 ProjectPapers. All rights reserved. | Your Trusted Research Partner for Academic Success</p>
         </div>
     </footer>
 
     <script>
-        // Simple form validation for demonstration
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const menuIcon = document.getElementById('menuIcon');
+        const navLinkItems = document.querySelectorAll('.nav-link');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Toggle icon
+            if (navLinks.classList.contains('active')) {
+                menuIcon.classList.remove('ri-menu-3-line');
+                menuIcon.classList.add('ri-close-line');
+            } else {
+                menuIcon.classList.remove('ri-close-line');
+                menuIcon.classList.add('ri-menu-3-line');
+            }
         });
 
+        // Close menu when clicking on a link
+        navLinkItems.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('ri-close-line');
+                menuIcon.classList.add('ri-menu-3-line');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('ri-close-line');
+                menuIcon.classList.add('ri-menu-3-line');
+            }
+        });
+
+        // Newsletter form validation
         document.querySelector('.footer-form').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Thank you for subscribing to our newsletter!');
@@ -1089,10 +1457,33 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
+        });
+
+        // Add scroll animation trigger
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.feature-card, .solution-card, .domain-card, .testimonial-card').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
